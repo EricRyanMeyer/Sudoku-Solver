@@ -16,10 +16,11 @@ public class Main {
 	public static void main(String[] args) {
 		SudokuGrid grid = new SudokuGrid();
 		SudokuStrategies strategies = new SudokuStrategies(grid);
-		grid.loadFromFile("test/m1.txt");
+		grid.loadFromFile("test/np2.txt");
 		System.out.println(grid.toString());
+		System.out.println("Total empty cells:" + grid.emptyCellCount());
 		strategies.solve();
 		System.out.println(grid.toString());
-		
+		System.out.println("Total empty cells:" + grid.emptyCellCount());
 	}
 }

@@ -20,9 +20,7 @@ import java.util.logging.Logger;
 public class SudokuGrid {
 
 	private SudokuCell[][] sGridCells;
-	private SudokuSet[] sRows;
-	private SudokuSet[] sColumns;
-	private SudokuSet[] sRegions;
+	private SudokuSet[] sRows, sColumns, sRegions;
 	//private SudokuGUI sGUI;
 
 	public SudokuGrid() {
@@ -93,5 +91,29 @@ public class SudokuGrid {
 
 	SudokuCell[][] getGridCells() {
 		return sGridCells;
+	}
+
+	SudokuSet[] getsRows() {
+		return sRows;
+	}
+
+	SudokuSet[] getsColumns() {
+		return sColumns;
+	}
+
+	SudokuSet[] getsRegions() {
+		return sRegions;
+	}
+
+	int emptyCellCount() {
+		int count = 0;
+		for (int r = 0; r < 9; r++) {
+			for (int c = 0; c < 9; c++) {
+				if (sGridCells[r][c].getValue() == 0) {
+					count++;
+				}
+			}
+		}
+		return count;
 	}
 }
