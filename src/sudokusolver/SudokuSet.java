@@ -4,49 +4,23 @@
  */
 package sudokusolver;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  *
  * @author Eric
  */
-final class SudokuSet {
-
-	//private SudokuCell[] sCells;
-	private List<SudokuCell> cells;
-
-	SudokuSet() {
-		this(new ArrayList<SudokuCell>());
+final class SudokuSet extends LinkedHashSet<SudokuCell> {
+	
+	SudokuSet(){
+		super();
 	}
 
-	SudokuSet(ArrayList<SudokuCell> sc) {
-		cells = sc;
-	}
-
-//	 SudokuSet(SudokuCell[] sc) {
-//		sCells.addAll(Arrays.asList(sc));
-//	}
-
-	SudokuCell getCell(int index) {
-		return cells.get(index);
-	}
-
-	void setCell(SudokuCell sc, int index) {
-		cells.set(index, sc);
-	}
-
-	void addCell(SudokuCell sc) {
-		cells.add(sc);
-	}
-
-	List<Integer> getCellValues() {
-		List<Integer> list = new ArrayList();
-		for (SudokuCell cell : cells) {
-			int val = cell.getValue();
-			if (val != 0) {
-				list.add(new Integer(val));
-			}
+	Set<Integer> getCellValues() {
+		Set<Integer> list = new LinkedHashSet();
+		for (SudokuCell cell : this) {
+				list.add(new Integer(cell.getValue()));
 		}
 		return list;
 	}
