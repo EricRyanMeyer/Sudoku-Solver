@@ -19,31 +19,31 @@ import java.util.logging.Logger;
  */
 public class SudokuGrid {
 
-	private SudokuCell[][] sGridCells;
-	private SudokuSet[] sRows, sColumns, sRegions;
+	private SudokuCell[][] gridCells;
+	private SudokuSet[] rows, columns, regions;
 	//private SudokuGUI sGUI;
 
 	public SudokuGrid() {
-		sGridCells = new SudokuCell[9][9];
-		sRows = new SudokuSet[9];
-		sColumns = new SudokuSet[9];
-		sRegions = new SudokuSet[9];
+		gridCells = new SudokuCell[9][9];
+		rows = new SudokuSet[9];
+		columns = new SudokuSet[9];
+		regions = new SudokuSet[9];
 
 		//Setup sets before cells
 		for (int i = 0; i < 9; i++) {
-			sRows[i] = new SudokuSet();
-			sColumns[i] = new SudokuSet();
-			sRegions[i] = new SudokuSet();
+			rows[i] = new SudokuSet();
+			columns[i] = new SudokuSet();
+			regions[i] = new SudokuSet();
 		}
 
 		//Setup cells and add to respective sets
 		for (int r = 0; r < 9; r++) {
 			for (int c = 0; c < 9; c++) {
 				int b = (r / 3) * 3 + (c / 3);
-				sGridCells[r][c] = new SudokuCell(sRows[r], sColumns[c], sRegions[b]);
-				sRows[r].addCell(sGridCells[r][c]);
-				sColumns[c].addCell(sGridCells[r][c]);
-				sRegions[b].addCell(sGridCells[r][c]);
+				gridCells[r][c] = new SudokuCell(rows[r], columns[c], regions[b]);
+				rows[r].add(gridCells[r][c]);
+				columns[c].add(gridCells[r][c]);
+				regions[b].add(gridCells[r][c]);
 			}
 		}
 	}
@@ -53,7 +53,7 @@ public class SudokuGrid {
 		StringBuilder sb = new StringBuilder();
 		for (int r = 0; r < 9; r++) {
 			for (int c = 0; c < 9; c++) {
-				sb.append(sGridCells[r][c].getValue());
+				sb.append(gridCells[r][c].getValue());
 			}
 			sb.append('\n');
 		}
@@ -63,7 +63,7 @@ public class SudokuGrid {
 	public void setCellValues(int[][] cellNums) {
 		for (int r = 0; r < 9; r++) {
 			for (int c = 0; c < 9; c++) {
-				sGridCells[r][c].setValue(cellNums[r][c]);
+				gridCells[r][c].setValue(cellNums[r][c]);
 			}
 		}
 	}
@@ -90,26 +90,26 @@ public class SudokuGrid {
 	}
 
 	SudokuCell[][] getGridCells() {
-		return sGridCells;
+		return gridCells;
 	}
 
-	SudokuSet[] getsRows() {
-		return sRows;
+	SudokuSet[] getRowSetArray() {
+		return rows;
 	}
 
-	SudokuSet[] getsColumns() {
-		return sColumns;
+	SudokuSet[] getColumnSetArray() {
+		return columns;
 	}
 
-	SudokuSet[] getsRegions() {
-		return sRegions;
+	SudokuSet[] getRegionSetArray() {
+		return regions;
 	}
 
 	int emptyCellCount() {
 		int count = 0;
 		for (int r = 0; r < 9; r++) {
 			for (int c = 0; c < 9; c++) {
-				if (sGridCells[r][c].getValue() == 0) {
+				if (gridCells[r][c].getValue() == 0) {
 					count++;
 				}
 			}
