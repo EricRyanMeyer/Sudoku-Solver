@@ -4,8 +4,8 @@
  */
 package sudokusolver;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  *
@@ -15,7 +15,7 @@ final class SudokuCell {
 
 	private SudokuSet rowSet, columnSet, regionSet;
 	private int value;
-	private List<Integer> candidates;
+	private Set<Integer> candidates;
 
 	SudokuCell() {
 		this(0);
@@ -75,16 +75,16 @@ final class SudokuCell {
 		}
 	}
 
-	List<Integer> getCandidates() {
+	Set<Integer> getCandidates() {
 		return candidates;
 	}
 
-	void setCandidates(List<Integer> candidates) {
+	void setCandidates(Set<Integer> candidates) {
 		this.candidates = candidates;
 	}
 
 	private void loadCandidates() {
-		candidates = new ArrayList<Integer>();
+		candidates = new LinkedHashSet<Integer>();
 		for (int i = 1; i < 10; i++) {
 			candidates.add(new Integer(i));
 		}
