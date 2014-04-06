@@ -116,25 +116,25 @@ public class SudokuStrategies {
 
 	private Set<Integer> checkForNakedTuple(SudokuSet source, SudokuSet match, int tupleSize) {
 		SudokuSet subsetSource = (SudokuSet) source.clone();
-		for (SudokuCell cell : source) {
+		for (SudokuCell sourceCell : source) {
 			//remove current cell from source clone to create subset for recursive call
-			subsetSource.remove(cell);
-			int numCandidates = cell.getCandidates().size();
+			subsetSource.remove(sourceCell);
+			int numCandidates = sourceCell.getCandidates().size();
 			if ((numCandidates > 1) && (numCandidates <= tupleSize)) {
 				//clone match and add cell to create superset for validation and recursive call
-				SudokuSet superMatch = (SudokuSet) match.clone();
-				superMatch.add(cell);
+				SudokuSet supersetMatch = (SudokuSet) match.clone();
+				supersetMatch.add(sourceCell);
 
 				//Build set of unique candidates from cells in superMatch
 				Set<Integer> tupleSet = new LinkedHashSet<Integer>();
-				for (SudokuCell cell2 : superMatch) {
-					tupleSet.addAll(cell2.getCandidates());
+				for (SudokuCell matchCell : supersetMatch) {
+					tupleSet.addAll(matchCell.getCandidates());
 				}
 
 				if (tupleSet.size() > tupleSize) {
 					continue;
-				} else if (superMatch.size() < tupleSize) {
-					return checkForNakedTuple(subsetSource, superMatch, tupleSize);
+				} else if (supersetMatch.size() < tupleSize) {
+					return checkForNakedTuple(subsetSource, supersetMatch, tupleSize);
 				} else {
 					return tupleSet;
 				}
